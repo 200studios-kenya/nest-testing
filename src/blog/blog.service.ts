@@ -17,4 +17,15 @@ export class BlogService {
         throw new BadRequestException(err);
       });
   };
+
+  all = (): Promise<BlogDocument[]> => {
+    return this.blogModel
+      .find()
+      .sort({ createdAt: -1 })
+      .exec()
+      .then((blogs) => blogs)
+      .catch((err) => {
+        throw new BadRequestException(err);
+      });
+  };
 }

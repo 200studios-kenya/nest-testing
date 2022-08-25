@@ -47,6 +47,13 @@ describe('BlogService', () => {
     expect(blog.title).toBe(newBlog.title);
   });
 
+  it('Should list all blogs', async () => {
+    await createBlog(newBlog);
+    const blogs = await service.all();
+    expect(blogs).toBeDefined();
+    expect(blogs.length).toBe(1);
+  });
+
   afterAll(async () => {
     await closeInMongodConnection();
   });

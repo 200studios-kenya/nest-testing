@@ -13,6 +13,18 @@ const mockService = {
       updatedAt: new Date(),
     };
   }),
+
+  all: jest.fn(() => {
+    return [
+      {
+        title: newBlog.title,
+        content: newBlog.content,
+        _id: '123',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ];
+  }),
 };
 
 describe('BlogController', () => {
@@ -43,5 +55,12 @@ describe('BlogController', () => {
     const blog = await createBlog(newBlog);
     expect(blog).toBeDefined();
     expect(blog.title).toBe(newBlog.title);
+  });
+
+  it('Should list all blogs', async () => {
+    await createBlog(newBlog);
+    const blogs = await controller.all();
+    expect(blogs).toBeDefined();
+    expect(blogs.length).toBe(1);
   });
 });
