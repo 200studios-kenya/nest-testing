@@ -75,5 +75,6 @@ describe('ShoesController', () => {
   it('should get a list of shoes', async () => {
     const list = await controller.get();
     expect(list.length).toBe(1);
+    expect(list[0].name).toBe(shoe.name);
   });
 });
